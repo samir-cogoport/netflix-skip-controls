@@ -12,12 +12,11 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["https://www.netflix.com/watch/*"],
-      "js": ["contentScript.js"]
-    }
-  ],
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.netflix.com/watch/*"]
+  "content_scripts": [{
+    "matches": ["*://*.netflix.com/*"],
+    "js": ["contentScript.js"],
+    "run_at": "document_end"
+  }],
+  "permissions": ["storage", "webNavigation"],
+  "host_permissions": ["*://*.netflix.com/*"]
 }

@@ -1,9 +1,17 @@
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({ autoClickNext: true,autoClickSkipRecaps: true, autoClickSkip: true }, () => {
-        if (chrome.runtime.lastError) {
-            console.error("Error setting storage:", chrome.runtime.lastError);
-        } else {
-            console.log("Default settings saved.");
-        }
+chrome.runtime.onStartup.addListener(() => {
+    chrome.storage.local.set({
+        autoClickNext: true,
+        autoClickSkipRecaps: true,
+        autoClickSkip: true,
     });
 });
+
+chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+    chrome.scripting.executeScript({
+        target: { tabId: details.tabId },
+        files: ['contentScript.js'],
+    });
+});
+
+chrome.alarms.create('keepAlive', { periodInMinutes: 0.1 });
+chrome.alarms.onAlarm.addListener(() => {});
