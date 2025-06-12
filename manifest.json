@@ -17,6 +17,6 @@
     "js": ["contentScript.js"],
     "run_at": "document_end"
   }],
-  "permissions": ["storage", "webNavigation"],
+  "permissions": ["storage", "webNavigation", "alarms"],
   "host_permissions": ["*://*.netflix.com/*"]
 }
